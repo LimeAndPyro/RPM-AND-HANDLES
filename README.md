@@ -310,9 +310,13 @@ If youve made it this far your code should look something like this minus all th
 Im getting lazy with this guide so if you havent figured out what you need to do here are the steps in order on what this program is doing.
 
 - Declare a variable of type integer named "intRead" initialised to 0
+
 - Get a handle to our running dummy program (use OpenProcess and check that it succeeded with the checking code that I provided in the lesson, in case of error use the error codes to investigate the reason)
+
 - Read the value of the variable "varInt" in our dummy program and store the result in our variable "intRead" (Use ReadProcessMemory with the handle you got, the memory address shown in the console of our dummy program and don't forget to add the prefix (LPCVOID) to type-cast it so the function doesn't bother you, store the result in our variable "intRead" by using it as a buffer simply by giving its memory address with &intRead, use sizeof(int) for the size, and let the last optional parameter as NULL)
+
 - Print to the console the new value of our variable "intRead" ( cout << "intRead = " << dec << intRead << endl; )
+
 - Print to the console a message "Press ENTER to quit." and pause the execution with either getchar() or system("pause > nul");
 
 Bellow is a gif on how the program works and its output.
@@ -322,23 +326,29 @@ Bellow is a gif on how the program works and its output.
 # If all else fails
 
 If OpenProcess fails:
+
 Make sure your 2 processes run with the same privileges, if the dummy program is ran as administrator and not the other it might fail.
 If you run the dummy program from directly from Visual Studio (or your IDE), try running it normally by double clicking the binary on disk instead.
 
 If intRead is still equal to 0:
+
 First make sure that OpenProcess succeeded.
 Second, test the return of ReadProcessMemory, it should return TRUE, otherwise, if it returns FALSE, you can use GetLastError() to get the error code to get more information on the error.
+
 Here is the some checking code you can use:
 Code:
-BOOL rpmReturn = ReadProcessMemory(hProcess, (LPCVOID)0x35AE3DFDE0, &intRead, sizeof(int), NULL);
-if (rpmReturn == FALSE) {
-	cout << "ReadProcessMemory failed. GetLastError = " << dec << GetLastError() << endl;
-	system("pause");
-	return EXIT_FAILURE;
-}
+	BOOL rpmReturn = ReadProcessMemory(hProcess, (LPCVOID)0x35AE3DFDE0, &intRead, sizeof(int), NULL);
+	if (rpmReturn == FALSE) {
+		cout << "ReadProcessMemory failed. GetLastError = " << dec << GetLastError() << endl;
+		system("pause");
+		return EXIT_FAILURE;
+	}
+
 If intRead is not equal to 0 but is not equal to the expected value either:
+
 You most likely read the wrong memory address or have requested permission to the wrong process ID.
 Check the PID and memory address.
+
 Make also sure that in both programs you declared an int.
 Try to compile and run them for the same architecture (either both x86 or x64, even if it should work cross-architecture).
 
