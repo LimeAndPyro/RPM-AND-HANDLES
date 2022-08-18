@@ -35,7 +35,7 @@ First Lets understand what exactly this function does.
   
   What is open process?
   
-  OpenProcess opens an existion process object running on a local machine.
+  OpenProcess opens an existing process object running on a local machine.
   
   The syntax looks like this
   
@@ -79,6 +79,45 @@ First Lets understand what exactly this function does.
  So now we can update the parameters we have with this.
  
         HANDLE hofproc = OpenProcess(PROCESS_ALL_ACCESS, false,
+        
+ Last but not least we have [in] dwProcessId
+        
+        [in] DWORD dwProcessId
+ 
+ This is the unique process identification number, commonly abbreviated to Process ID or even PID, of the process we want to get an access to.
+ *for slow people like me this is numbers that windows assigns to processes to help identify and modify them*
+ 
+ How do we obtain this Process ID thingy?
+    
+ Well we can find it in task manager
+ 
+ ![xcwu9Jh](https://user-images.githubusercontent.com/98422417/185277827-b30e0f57-27f6-4d6c-8965-91369aa4991a.png)
+ 
+ But to make it easier we also list is out here on the original program
+ 
+        DWORD pid = GetCurrentProcessId();
+        std::cout << "Process ID: " << pid << std::endl << std::endl;
+ 
+ If you havent Run the program yet it looks like this
+ 
+ ![FYFVHzs](https://user-images.githubusercontent.com/98422417/185278105-297dab85-cd0d-4c26-9b2b-2382524eb5f4.png)
+ 
+ If your not blind you can see the process ID here
+ 
+ ![paoqiM8](https://user-images.githubusercontent.com/98422417/185278205-b7c4c6e5-181f-413b-a60e-0a92171ebfca.png)
+ 
+ Note this number will be different for all of you!
+ 
+ YAY We Can finally finish this function
+    Yours should look something like this
+    
+        HANDLE hofproc = OpenProcess(PROCESS_ALL_ACCESS, false, PID);
+        
+ Remember that PID is stored in a DWORD we defined earlier
+   
+        DWORD pid = GetCurrentProcessId();
+
+
   
  
       
