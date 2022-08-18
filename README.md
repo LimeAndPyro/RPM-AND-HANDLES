@@ -4,7 +4,7 @@ This program was made from a guide that helped me understand these things better
 
 https://www.unknowncheats.me/forum/programming-for-beginners/267073-coding-hacking-introduction-guide-practical-external-game-hacking.html
 
-its a older guide to im going to reitterate what is going on here using my own words as well as words from this guide
+This is a older guide so im going to reitterate what is going on here using my own words as well as words from this guide
 
 
 #What is READ PROCESS MEMORY? 
