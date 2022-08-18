@@ -44,8 +44,42 @@ First Lets understand what exactly this function does.
         [in] BOOL  bInheritHandle,
         [in] DWORD dwProcessId
         );
+        
+  Lets look at this first parameter.
       
-
+        [in] DWORD dwDesiredAccess
+        
+  dwDesiredAccess is the desired access level to the process object your opening.
+  More information on this can be found here {https://docs.microsoft.com/en-us/windows/win32/procthread/process-security-and-access-rights}
+  As im not going to list them all out :)
+  
+  In this program we use *PROCESS_ALL_ACCESS*
+  Which you guessed it, gives all access Who would have thought?
+  
+  So far we have this
+        
+        HANDLE hofproc = OpenProcess(PROCESS_ALL_ACCESS,
+  
+  Next parameter we are going to take a look at is a BOOL.
+  
+        [in] BOOL  bInheritHandle,
+        
+  obv this is going to either return true or false and if you dont know that you should go learn more programing and come back later.
+  
+  So what if we return true?
+        
+        If this value is TRUE, processes created by this process will inherit the handle.
+  
+  And what about false?
+        
+        If this value is FALSE, processes do not inherit this handle.
+        
+ Again more information on this can be found here -> https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-openprocess
+ 
+ So now we can update the parameters we have with this.
+ 
+        HANDLE hofproc = OpenProcess(PROCESS_ALL_ACCESS, false,
+  
  
       
   
