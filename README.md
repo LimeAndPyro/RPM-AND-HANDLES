@@ -337,22 +337,30 @@ Second, test the return of ReadProcessMemory, it should return TRUE, otherwise, 
 
 Here is the some checking code you can use:
 Code:
+	
 	BOOL rpmReturn = ReadProcessMemory(hProcess, (LPCVOID)0x35AE3DFDE0, &intRead, sizeof(int), NULL);
 	if (rpmReturn == FALSE) {
 		cout << "ReadProcessMemory failed. GetLastError = " << dec << GetLastError() << endl;
 		system("pause");
 		return EXIT_FAILURE;
 	}
+	
 
 If intRead is not equal to 0 but is not equal to the expected value either:
 
 You most likely read the wrong memory address or have requested permission to the wrong process ID.
 Check the PID and memory address.
-
 Make also sure that in both programs you declared an int.
 Try to compile and run them for the same architecture (either both x86 or x64, even if it should work cross-architecture).
 
 If you have an error and have an error code, go on the error codes list on MSDN and use this additional information on the error to try to solve the issue.
+
+# Special Thanks
+
+Thank you so much to harakirinox from UNKOWNCHEATS https://www.unknowncheats.me/forum/programming-for-beginners/267073-coding-hacking-introduction-guide-practical-external-game-hacking.html
+As this guide is based off of his guide.
+
+AND THANK YOU for reading and checking out my repo if you have any questions you can dm me on discord Lime/Pyro/Creed#9739
 
 
   
