@@ -319,6 +319,30 @@ Bellow is a gif on how the program works and its output.
 
 ![brave_7J0u5689eV](https://user-images.githubusercontent.com/98422417/185287092-73b984e7-4580-449e-9670-cb7282a786f2.gif)
 
+# If all else fails
+
+If OpenProcess fails:
+Make sure your 2 processes run with the same privileges, if the dummy program is ran as administrator and not the other it might fail.
+If you run the dummy program from directly from Visual Studio (or your IDE), try running it normally by double clicking the binary on disk instead.
+
+If intRead is still equal to 0:
+First make sure that OpenProcess succeeded.
+Second, test the return of ReadProcessMemory, it should return TRUE, otherwise, if it returns FALSE, you can use GetLastError() to get the error code to get more information on the error.
+Here is the some checking code you can use:
+Code:
+BOOL rpmReturn = ReadProcessMemory(hProcess, (LPCVOID)0x35AE3DFDE0, &intRead, sizeof(int), NULL);
+if (rpmReturn == FALSE) {
+	cout << "ReadProcessMemory failed. GetLastError = " << dec << GetLastError() << endl;
+	system("pause");
+	return EXIT_FAILURE;
+}
+If intRead is not equal to 0 but is not equal to the expected value either:
+You most likely read the wrong memory address or have requested permission to the wrong process ID.
+Check the PID and memory address.
+Make also sure that in both programs you declared an int.
+Try to compile and run them for the same architecture (either both x86 or x64, even if it should work cross-architecture).
+
+If you have an error and have an error code, go on the error codes list on MSDN and use this additional information on the error to try to solve the issue.
 
 
   
