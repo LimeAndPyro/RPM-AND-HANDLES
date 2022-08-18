@@ -6,6 +6,8 @@ https://www.unknowncheats.me/forum/programming-for-beginners/267073-coding-hacki
 
 This is a older guide so im going to reitterate what is going on here using my own words as well as words from this guide
 
+Eventually ill add write process memory as well but this took me about two hours so not rn
+
 
 # What is READ PROCESS MEMORY? 
 Lets First go over the required parameters to use this function. More information on this topic can be found here https://docs.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-readprocessmemory
