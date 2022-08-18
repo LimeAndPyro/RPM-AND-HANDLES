@@ -116,7 +116,36 @@ First Lets understand what exactly this function does.
  Remember that PID is stored in a DWORD we defined earlier
    
         DWORD pid = GetCurrentProcessId();
+        
+ Congrats you have succesfully defined your first HANDLE, And im closer to smoking this bowl of weed :)
+ 
+ BUT WAIT
+ 
+ first we need to know to properly error handle your handle jsut in case it fails to grab the Running PID
+ This is really simple like realllllly simple as its just a if check to see if it failed or if the value is NULL, for example 
+ 
+        HANDLE hofproc = OpenProcess(PROCESS_ALL_ACCESS, false, PID);
+	if (hofproc != NULL)
+    {
+        //Do Shit
+    }
+    
+Just remember to properly handle the errors too dont just tuck it under the sheets!
+For example.
 
+    if (hofproc != NULL)
+	{
+		//Do Shit
+        return EXIT_SUCCESS;
+	}
+	else
+	{
+		std::cout << "-------------------HANDLE FAILED TO ATTATCH TO PROCESS------------------------------" << std::endl;
+		return EXIT_FAILURE;
+	}
+Finally for more information on HANDLES visit {https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-openprocess?redirectedfrom=MSDN} and {https://docs.microsoft.com/en-us/windows/win32/rpc/handles}
+
+# Back To RPM (Read Process Memory)
 
   
  
